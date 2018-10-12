@@ -23,7 +23,8 @@ print(list_of_dt[0].a["id"])
 dict=""
 
 for i in range(len(list_of_dd)):
-    dict+=str(list_of_dt[i].a["id"]).strip().replace("\n","")+"\t"+str(list_of_dd[i].p.text).strip().replace("\n","")+"\n"
+    if "In_forma_pauperis"!=str(list_of_dt[i].a["id"]).strip().replace("\n","").replace(";",""):
+        dict+=str(list_of_dt[i].a["id"]).strip().replace("\n","").replace(";",",")+";"+str(list_of_dd[i].p.text).strip().replace(";",",")+"\n"
 for i in range(ord('A'),ord('Z'),1):
     url = "https://dictionary.law.com/Default.aspx?letter="+chr(i)
     response = requests.get(url)
@@ -31,8 +32,6 @@ for i in range(ord('A'),ord('Z'),1):
     words=soup.findAll("span", "word")
     for i in range(len(words)):
         dict +=str(words[i].a.text.strip()).replace("\n","")+"\n"
-
-
 
 print(dict)
 file.write(dict)
