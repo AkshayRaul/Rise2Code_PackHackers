@@ -1,6 +1,6 @@
 import pandas as pd
 from bs4 import BeautifulSoup
-import lxml
+import simplejson
 import  urllib3
 import requests
 import sys
@@ -10,7 +10,7 @@ import sys
 
 #Google search API Key: AIzaSyB7drVoOEtw21-m_uNyh-p-BHmvKTbljBo
 
-file=open("dictionary_of_legal_terms.csv","w+")
+file=open("dictionary_of_legal_terms.json","w+")
 
 url="http://www.uscourts.gov/glossary"
 response=requests.get(url)
@@ -21,18 +21,20 @@ list_of_dd=soup.findAll("dd")
 # print(list_of_dd[0].p.text)
 print(list_of_dt[0].a["id"])
 dict=""
-
+json_data={}
 for i in range(len(list_of_dd)):
     if "In_forma_pauperis"!=str(list_of_dt[i].a["id"]).strip().replace("\n","").replace(";",""):
-        dict+=str(list_of_dt[i].a["id"]).strip().replace("\n","").replace(";",",")+";"+str(list_of_dd[i].p.text).strip().replace(";",",")+"\n"
+        json_data[str(list_of_dt[i].a["id"]).strip().replace("\n","").replace(";",",")] =str(list_of_dd[i].p.text).strip().replace(";",",")
+        dict=simplejson.dumps(json_data)
 for i in range(ord('A'),ord('Z'),1):
     url = "https://dictionary.law.com/Default.aspx?letter="+chr(i)
     response = requests.get(url)
     soup = BeautifulSoup(response.content, "lxml")
     words=soup.findAll("span", "word")
     for i in range(len(words)):
-        dict +=str(words[i].a.text.strip()).replace("\n","")+"\n"
+        json_data[str(words[i].a.text.strip()).replace("\n","")]=""
+        dict = simplejson.dumps(json_data)
+print(simplejson.dumps(dict,indent=4))
 
-print(dict)
 file.write(dict)
 file.close()
