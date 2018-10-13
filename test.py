@@ -79,11 +79,6 @@ print(np.mean(predicted_svm == test_target))
 
 # In[18]:
 
-# Grid Search
-# Here, we are creating a list of parameters for which we would like to do performance tuning.
-# All the parameters name start with the classifier name (remember the arbitrary name we gave).
-# E.g. vect__ngram_range; here we are telling to use unigram and bigrams and choose the one which is optimal.
-
 from sklearn.model_selection import GridSearchCV
 from sklearn import metrics
 
@@ -96,6 +91,7 @@ parameters = {'vect__ngram_range': [(1, 1), (1, 2)], 'tfidf__use_idf': (True, Fa
 
 gs_clf = GridSearchCV(text_clf, parameters, n_jobs=-1)
 gs_clf = gs_clf.fit(train_data, train_target)
+print(gs_clf.cv_results_.keys())
 
 # In[23]:
 
@@ -104,4 +100,13 @@ gs_clf = gs_clf.fit(train_data, train_target)
 print(gs_clf.best_score_)
 print(gs_clf.best_params_)
 
-metrics.classification_report(test_target, predicted,target_names=["LEGAL","NOT LEGAL"])
+from sklearn.metrics import classification_report
+
+print('Best score: %0.3f' % gs_clf.best_score_)
+print('Best parameters set:')
+best_parameters = gs_clf.best_estimator_.get_params()
+for param_name in sorted(parameters.keys()):
+    print('\t%s: %r' % (param_name, best_parameters[param_name]))
+
+predictions = gs_clf.predict(twenty_test)
+print(classification_report(test_target, predictions))
