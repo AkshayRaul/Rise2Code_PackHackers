@@ -11,7 +11,7 @@ import relevance
 output=open("results.csv","w+")
 list=pd.read_csv("Bad_Citation_Searches.csv",delimiter=",", encoding="UTF-8", error_bad_lines=False)
 print(list)
-for i in range(5):
+for i in range(len(list)):
     search_query = list.loc[i][0]
     url = "http://www.google.com/search?q=" + parse.quote(search_query)
     url_pool_manager = urllib3.PoolManager()
@@ -80,8 +80,9 @@ for i in range(5):
     match=relevance.token(ans)
     if match>0.25:
         output.write(search_query+","+str(match)+","+target_url+",LEGAL\n")
-    else: output.write(search_query+","+str(match)+",N/A,NOT LEGAL\n")
-    output.close()
+    else:
+        output.write(search_query+","+str(match)+",N/A,NOT LEGAL\n")
+output.close()
     #WORKING CODE FOR ENTIRE TEXT
     # file_object = open(r"sample.txt","w")
     # file_object.write(ans.encode('utf-8'))
