@@ -24,13 +24,11 @@ def token(ans):
     count_relevant_words=0
     total_frequent_words=0
     print("Loading")
-    for i in range(int(len(count_frequency)*0.4)):
+    for i in range(int(len(count_frequency))):
         total_frequent_words+=count_frequency.most_common()[i][1]
         if reader.get(ps.stem(count_frequency.most_common()[i][0].lower())):
 
             count_relevant_words=count_relevant_words+int(count_frequency.most_common()[i][1])
-    # print(count_relevant_words)
-    # print(total_frequent_words)
     print(count_relevant_words/total_frequent_words)
     return count_relevant_words/total_frequent_words
 
