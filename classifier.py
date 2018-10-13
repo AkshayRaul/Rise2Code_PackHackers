@@ -1,4 +1,3 @@
-
 import json
 import requests
 
@@ -7,7 +6,13 @@ headers={
     "Content-Type":"application/json"
 }
 payload={
-    "data":"When Depositions May Be Taken. After commencement of the action, any party may take the testimony of any person, including a party, by deposition upon oral examination. Leave of court, granted with or without notice, must be obtained only if theWhen Depositions May Be Taken. After commencement of the action, any party may take the testimony of any person, including a party, by deposition upon oral examination. Leave of court, granted with or without notice, must be obtained only if the plaintiff seeks to take a deposition before the expiration of the period within which a defendant may file a responsive pleading under Rule 3:8, except that leave is not required (1) if a defendant has served a notice of taking deposition, or (2) if special notice is given as provided in subdivision (b)(2) of this Rule. The attendance of witnesses may be compelled by subpoena. The deposition of a person confined in prison may be taken only by leave of court on such terms as the court prescribes. (a1) Taking of Depositions (ii) Non-party Witness Depositions. Unless otherwise provided by the law of the jurisdictio where a non-party witness resides, a deposition of a non-party witness shall be taken in the county or city where the non-party witness resides, is employed, or has a principal place of business; at a place upon which the witness and the parties to the litigation agree; or at a place that the court may, for good cause, designate" \
+    "data":"[4:41 PM, 10/12/2018] Shwetha: Rule 9019. Compromise and Arbitration(a) Compromise. On motion by the trustee and after notice and a hearing, the court may approve a compromise or settlement. Notice shall be given to creditors, the United States trustee, the debtor, and indenture trustees as provided in Rule 2002 and to any other entity as the court may direct.(b) Authority To Compromise or Settle Controversies Within Classes. After a hearing on such notice as the court may direct, the court may fix a class or classes of controversies and authorize the trustee to compromise or settle controversies within such class or classes without further hearing or notice."
+           "(c) Arbitration. On stipulation of the parties to any controversy affecting the estate the court may authorize the matter to be submitted to final and binding arbitration."
+           "Notes (As amended Mar. 30, 1987, eff. Aug. 1, 1987; Apr. 30, 1991, eff. Aug. 1, 1991; Apr. 22, 1993, eff. Aug. 1, 1993.)"
+           "Notes of Advisory Committee on Rules—1983 Subdivisions (a) and (c) of this rule are essentially the same as the provisions of former Bankruptcy Rule 919 and subdivision (b) is the same as former Rule 8–514(b), which was applicable to railroad reorganizations. Subdivision (b) permits the court to deal efficiently with a case in which there may be a large number of settlements."\
+           "Subdivision (a) is amended to conform to the language of §102(1) of the Code. Other amendments are stylistic and make no substantive change."
+           "Notes of Advisory Committee on Rules—1991 Amendment This rule is amended to enable the United States trustee to object or otherwise be heard in connection with a proposed compromise or settlement and otherwise to monitor the progress of the case."
+           "Notes of Advisory Committee on Rules—1993 Amendment"
     }
 
 response=requests.post("https://23nt6yrife.execute-api.us-east-1.amazonaws.com/dev/ilabs-concept-extractor",data=json.dumps(payload),headers=headers)
